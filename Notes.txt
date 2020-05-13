@@ -1,0 +1,112 @@
+Google Cloud Platform Training
+
+Intro to Google Cloud Platform
+
+1. GCP Overview
+2. GCP Services
+3. Beyond Services
+
+## Innovation
+ - BigTable: structured storage built on GFS / Colossus
+ - Spanner:  planet scale DB, externally-consistent distributed transactions
+ - GCS (built on Colossus): Google Cloud Storage
+ - BigQuery (from Dremmel )
+
+
+Google hires Site Reliability Engineers (read for free)
+https://landing.google.com/sre/books/
+https://landing.google.com/sre/sre-book/toc/index.html
+
+
+## GCP Structure and Design
+############################
+
+Design Principles
+ - Global
+ - Secure
+ - Huge Scale
+ - For Devs
+
+Cloud Locations:
+https://cloud.google.com/about/locations/#regions-tab
+
+GCP intrinsically global
+  - Global model
+  - Easier to handle latency and failures in global way
+  - Could be more sensitive to multi-region / global failure modes
+
+AWS is intrinsically region-scoped
+  - Regional model
+  - Simplifies data sovereignty
+
+## Physical Infrastructure
+  - vCPU > Physical Server > Rack > Data Center > Zone > Region > Multi-Region
+    (each region in Multi-Region is at least 100 miles away from others)
+    - Private Global Network
+    - Points of Presence (POPs) - Network edges and CDN locations
+
+## Network Ingress & Egress
+  - Normal network: routes via Internet to edge location closest to destination
+
+  - Google network: routes so traffic enters from Internet at edge closes to source
+    - Single global IP address can be load balanced worldwide
+    - Side steup DNS issues
+
+  - Can now opt for "normal" network routing to reduce price (and function)
+
+## Pricing
+  - Provisioned:  Make sure you're ready to hande X
+  - Usage:  Make sure you're ready to hande X
+  - Network Traffic
+      - Free ingress
+      - Charged egress, by GBs used
+      - Egress to GCP services sometimes free
+          - Depends on the destination service
+          - Depends on the location of that service
+
+## Security
+  - Separation of duties and physical security
+  - Everything always encrypted at rest
+  - Strong key and identity management
+  - Network encryption
+      - All control info encrypted
+      - All WAN traffic to be encrypted automatically
+      - Moving towards encrypting all local traffic within data centers
+  - Distrust the network anyway!?!
+      - BeyondCorp shifts access control from network perimeter to devices / users
+https://cloud.google.com/security/security-design/
+
+## Scale and Automation
+  - Scalability must be unbounded
+  - Devs don't want to answer pages
+
+## Resource Quotas (Soft Limits)
+  - Scope
+     - Regional
+     - Global
+  - Changes
+     - Automatic
+     - By request
+        - response in 24-48 hrs
+        - may be refused
+  - Queryable
+      gcloud compute project-info describe --project myprojectid
+
+## Organization
+   - Projects are similar to AWS accounts
+   - Projects own resources
+   - Resources can be shared with other projects
+   - Projects can be grouped and controlled in a hierarchy
+
+
+
+
+Regions & Zones:  https://cloud.google.com/about/locations/#regions-tab
+                  https://cloud.google.com/compute/docs/regions-zones/
+Load Balancing:   https://cloud.google.com/load-balancing/docs/https
+BeyondCorp: zero trust security
+            https://cloud.google.com/beyondcorp/
+Infra Security Design:  https://cloud.google.com/security/infrastructure/design
+Resource Quotas:        https://cloud.google.com/compute/quotas
+
+[.]
